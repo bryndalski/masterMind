@@ -6,6 +6,8 @@ class Main extends Game implements MainInterface {
   boardTable: HTMLTableElement
   boardTableArray: HTMLTableCellElement[][]
   boardsResultsContainer: HTMLTableElement
+  anwsersTableArray: HTMLTableCellElement[][]
+
   constructor() {
     super()
     //?htmlContainers
@@ -15,6 +17,8 @@ class Main extends Game implements MainInterface {
     ) as HTMLTableElement
     this.boardTableArray = []
     this.currentRow = 0
+    this.anwsersTableArray = []
+
     this.start()
   }
   currentRow: number
@@ -55,11 +59,11 @@ class Main extends Game implements MainInterface {
   private createAnwsers(): void {
     for (let i: number = 0; i < CONFIG.tryNumber; i++) {
       let singleRow = document.createElement('tr')
-      // this.boardTableArray[i] = []
+      this.anwsersTableArray[i] = []
       for (let cell = 0; cell < CONFIG.dotPerRow; cell++) {
         let cell = document.createElement('th')
         singleRow.appendChild(cell)
-        // this.boardTableArray[i].push(cell)
+        this.anwsersTableArray[i].push(cell)
       }
       this.boardsResultsContainer.prepend(singleRow)
     }
@@ -75,11 +79,21 @@ class Main extends Game implements MainInterface {
           e.style.background = `url('./assets/img/${this.dotColorsArray[c]}.png')`
         },
       )
-      if (this.currentRow == CONFIG.tryNumber) {
-        console.log('adios')
-      } else {
-        console.log(this.currentRow)
+      this.nextDotsContainer.forEach((e) => (e.style.background = ''))
 
+      //?check for win
+
+      this.checkCode(this.dotColorsArray).map((e, c) => {
+        this.anwsersTableArray[this.currentRow][
+          c
+        ].style.background = `url('./assets/img/${e}.png')`
+      })
+
+      this.dotColorsArray = []
+      //?end game
+      if (this.currentRow == CONFIG.tryNumber) {
+        alert('Koniec gry : poprawny kod to ' + this.codeArray.join(' '))
+      } else {
         this.currentRow++
       }
     }

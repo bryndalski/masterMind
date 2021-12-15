@@ -4,4 +4,5 @@ export default interface GameInterface {
   hasStarted: boolean
   slectedDotColor: string | null
   dotColorsArray: Array<string>
+  nextDotsContainer: Array<HTMLTableCellElement>
 }

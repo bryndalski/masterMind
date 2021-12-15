@@ -24,7 +24,21 @@ export default class Code implements CodeInterface {
    *
    * @param codeToCheck Array of code that has to be checked
    */
-  protected checkCode = (codeToCheck: Array<string>): Object => {
-    return {}
+  protected checkCode = (codeToCheck: Array<string>): Array<string> => {
+    let toReturn: Array<string> = []
+    let includedColors: Array<string> = []
+
+    codeToCheck.forEach((e, c) => {
+      if (this.codeArray[c] == e) {
+        toReturn.push('black')
+      } else {
+        if (this.codeArray.includes(e) && !includedColors.includes(e)) {
+          includedColors.push(e)
+          toReturn.push('white')
+        }
+      }
+    })
+
+    return toReturn.sort()
   }
 }

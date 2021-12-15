@@ -11,4 +11,5 @@ export default interface MainInterface {
   boardTableArray: Array<Array<HTMLTableCellElement>>
   boardsResultsContainer: HTMLTableElement
   currentRow: number
+  anwsersTableArray: Array<Array<HTMLTableCellElement>>
 }

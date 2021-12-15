@@ -8,12 +8,14 @@ export default class Game extends Code implements GameInterface {
   hasStarted: boolean
   slectedDotColor: string | null
   dotColorsArray: string[]
+  nextDotsContainer: HTMLTableCellElement[]
 
   constructor() {
     super()
     this.hasStarted = false
     this.startButton = document.querySelector('#start') as HTMLButtonElement
     this.dotColorsArray = ['', '', '', '']
+    this.nextDotsContainer = []
   }
 
   //?new game
@@ -61,6 +63,7 @@ export default class Game extends Code implements GameInterface {
       cell.addEventListener('click', () => {
         this.putDot(cell, i)
       })
+      this.nextDotsContainer.push(cell)
       container.appendChild(cell)
     }
   }
