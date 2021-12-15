@@ -25,6 +25,7 @@ export default class Game extends Code implements GameInterface {
     this.hasStarted = true
     this.newCode()
   }
+
   /**
    * Renders all availible dots
    */
@@ -44,19 +45,39 @@ export default class Game extends Code implements GameInterface {
         .appendChild(cell)
     })
   }
+  /**
+   * Render dots of code
+   */
+  protected renderNextDots(): void {
+    let container = document.querySelector(
+      '#nextGuess tbody tr',
+    ) as HTMLTableRowElement
+    for (let i: number = 0; i < CONFIG.dotPerRow; i++) {
+      let cell = document.createElement('th')
+      //*handle cell click
+      cell.addEventListener('click', () => {
+        this.putDot(cell)
+      })
+      container.appendChild(cell)
+    }
+  }
 
   //?helping functions
   /**
-   *
+   *   Handle cursor change for a dot
    * @param color color of dot
    */
-  selectDot = (color: string): void => {
+  private selectDot = (color: string): void => {
     if (this.hasStarted) {
-      let container = document.querySelector('#dots') as HTMLTableElement
-      container.style.visibility = 'hidden'
       this.slectedDotColor = color
       document.body.style.cursor = `url('../assets/img/${color}.png'), auto`
-      container.style.visibility = 'visible'
+    }
+  }
+  private putDot = (cell: HTMLTableCellElement) => {
+    if (this.hasStarted && this.slectedDotColor != null) {
+      cell.style.background = `url('./assets/img/${this.slectedDotColor}.png')`
+      document.body.style.cursor = `url('../assets/img/kursor.png'), auto`
+      this.slectedDotColor = null
     }
   }
 }

@@ -20,6 +20,7 @@ class Main extends Game implements MainInterface {
     this.ceateBoadrd()
     this.createAnwsers()
     this.renderAvailibleDots()
+    this.renderNextDots()
     document.querySelector('#start').addEventListener('click', this.startGame)
   }
 

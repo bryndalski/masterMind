@@ -94,3 +94,20 @@ body {
   width: 41px;
   height: 41px;
 }
+
+#nextGuess {
+  width: 240px;
+  height: 50px;
+  position: absolute;
+  top: 270px;
+  left: 620px;
+}
+#nextGuess tr {
+  margin: 0;
+}
+#nextGuess tr th {
+  width: 41px;
+  height: 41px;
+  background-repeat: no-repeat;
+  background-size: contain !important;
+}
