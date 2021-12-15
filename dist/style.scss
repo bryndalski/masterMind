@@ -55,14 +55,34 @@ body {
   position: absolute;
   top: 93px;
   left: 170px;
+  border-collapse: separate;
+  border-spacing: initial;
+  height: 470px;
   tr {
+    border: solid 1px red;
     margin: 0;
     th {
       margin-left: 10px;
-      border: solid 1px black;
       width: 41px;
       height: 41px;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
     }
+  }
+}
+
+#try {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 350px;
+  left: 685px;
+  height: 50px;
+  width: 100px;
+  background: transparent;
+  img {
+    width: 100px;
+    height: 50px;
   }
 }
 

@@ -7,10 +7,13 @@ export default class Game extends Code implements GameInterface {
   pickDotContianer: HTMLTableElement
   hasStarted: boolean
   slectedDotColor: string | null
+  dotColorsArray: string[]
+
   constructor() {
     super()
     this.hasStarted = false
     this.startButton = document.querySelector('#start') as HTMLButtonElement
+    this.dotColorsArray = ['', '', '', '']
   }
 
   //?new game
@@ -56,7 +59,7 @@ export default class Game extends Code implements GameInterface {
       let cell = document.createElement('th')
       //*handle cell click
       cell.addEventListener('click', () => {
-        this.putDot(cell)
+        this.putDot(cell, i)
       })
       container.appendChild(cell)
     }
@@ -73,11 +76,23 @@ export default class Game extends Code implements GameInterface {
       document.body.style.cursor = `url('../assets/img/${color}.png'), auto`
     }
   }
-  private putDot = (cell: HTMLTableCellElement) => {
+  /**
+   * Enables selecting color
+   * @param cell Cell element
+   * @param dotNumber Number of rendered dot
+   */
+  private putDot = (cell: HTMLTableCellElement, dotNumber: number) => {
     if (this.hasStarted && this.slectedDotColor != null) {
       cell.style.background = `url('./assets/img/${this.slectedDotColor}.png')`
       document.body.style.cursor = `url('../assets/img/kursor.png'), auto`
+      this.dotColorsArray[dotNumber] = this.slectedDotColor
       this.slectedDotColor = null
     }
+  }
+  /**
+   * check if array contains empty string
+   */
+  isArrayFull = () => {
+    return !this.dotColorsArray.includes('')
   }
 }
