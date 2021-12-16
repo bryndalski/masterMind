@@ -98,4 +98,17 @@ export default class Game extends Code implements GameInterface {
   isArrayFull = () => {
     return !this.dotColorsArray.includes('')
   }
+
+  private giveUp = () => {
+    if (this.hasStarted) {
+      this.hasStarted = !this.hasStarted
+      alert(
+        'nie fajnie się poddawać ale masz kod patrz co sraciłeś ' +
+          this.codeArray.join(' '),
+      )
+      setTimeout(() => {
+        window.location.reload()
+      }, 3000)
+    }
+  }
 }

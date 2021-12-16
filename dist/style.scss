@@ -26,7 +26,8 @@ body {
     margin: 0;
     th {
       // margin-left: 10px;
-      border: solid 1px blue;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
       width: 10px;
       height: 10px;
     }

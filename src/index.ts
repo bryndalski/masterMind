@@ -29,6 +29,7 @@ class Main extends Game implements MainInterface {
     this.renderNextDots()
     document.querySelector('#start').addEventListener('click', this.startGame)
     document.querySelector('#try').addEventListener('click', this.checkAnwsers)
+    document.querySelector('#giveUp').addEventListener('click', this.giveUp)
   }
 
   //? Starting methods section
@@ -82,16 +83,23 @@ class Main extends Game implements MainInterface {
       this.nextDotsContainer.forEach((e) => (e.style.background = ''))
 
       //?check for win
+      let dots: Array<string> = this.checkCode(this.dotColorsArray)
 
-      this.checkCode(this.dotColorsArray).map((e, c) => {
-        this.anwsersTableArray[this.currentRow][
-          c
-        ].style.background = `url('./assets/img/${e}.png')`
-      })
+      if (
+        [...new Set(dots)].length == 1 &&
+        [...new Set(dots)].includes('black')
+      ) {
+        return alert('gratulacje wygranej!!!!!! zgadłeś kod')
+      } else
+        dots.map((e, c) => {
+          this.anwsersTableArray[this.currentRow][
+            c
+          ].style.background = `url('./assets/img/${e}.png')`
+        })
 
-      this.dotColorsArray = []
+      this.dotColorsArray = ['', '', '', '']
       //?end game
-      if (this.currentRow == CONFIG.tryNumber) {
+      if (this.currentRow == CONFIG.tryNumber - 1) {
         alert('Koniec gry : poprawny kod to ' + this.codeArray.join(' '))
       } else {
         this.currentRow++
